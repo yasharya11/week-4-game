@@ -1,0 +1,23 @@
+#titleDiv, #randomNumberDiv, #statsDiv, #crystalDiv, #scoreDiv {
+    background-color: red;
+}
+
+#titleDiv{
+    background-color: burlywood;
+}
+
+#randomNumberDiv{
+    background-color: green;
+}
+
+#stats{
+    background-color: turquoise;
+}
+
+#crystalDiv{
+    background-color: #fff;
+}
+
+#scoreDiv{
+    background-color: goldenrod;
+}

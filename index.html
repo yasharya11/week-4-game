@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+<== DIRECT INSTRUCTIONS ==>
+*1* You will be given a random number at the start of the game
+*2* There are four crystals below. By clicking on crystal you will add a specific amount of points to your total score
+*3* You win the game by matching your total score to the random numer, you lose the game if your total score goes above the random number
+*4* The value of each crystal is hidden from you until you click on it
+*5* Each time when the game starts, the game will change the value of each crystal
+^== DIRECT INSTRUCTIONS ==^
+<== OBJECTS PSEUDO ==>
+var randomNumber{
+    this will be generated at the start of the application
+}
+var pointsValue{
+    this is set to 0 at the start or when the game resets
+}
+var gameResult{
+    this value will be set to undefined when the game starts or is reset
+}
+obj crystal{
+    props{
+        var crystalsValue{
+            this will be randomly generated BOTH when the page STARTS AND when the game is RESETS
+        }
+        fnc resetCrystals{
+            this will reset the pointsValue for the game reset event(when pointsValue = randomNumber)
+        }
+    }
+}
+fnc clickCrystals{
+    when the user clicks on a crystal, the pointsValue variable is increased by the value of the crystal variable and compared to the value of the randomNumber variable
+    
+    IF (pointsValue == randomNumber){
+        the user wins and the game, the game counter is updated
+    } ELSE IF (pointsValue < randomNumber){
+        the pointsvalue is inceased and displayed, the game counter is updated
+    } ELSE {
+        the user loses the game, the game is reset, the game counter is updated, the ui is updated
+    }
+}
+^== OBJECTS PSEUDO ==^
+<== LAYOUT PSEUDO ==>
+ROW1
+    COL12
+        "Crystals Collector!"
+ROW2
+    COL9
+        Value of the random number
+    COL3
+        ROW1
+            Result of game
+        ROW2
+            Value of wins
+        ROW3
+            Value of losses
+ROW3
+    COL3
+        Crystal1
+    COL3
+        Crystal2
+    COL3
+        Crystal3
+    COL3
+        Crystal4
+ROW4
+    COL12
+        Your score is:
+ROW5
+    COL12
+        points value
+^== LAYOUT PSEDUO ==^
+-->
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Calculator</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- Jumbotron for Title -->
+    <div class="container" style="padding-left:20%;padding-right:20%;">
+        <div class="row" x>
+            <div class="col-lg-12" id="titleDiv">
+                <span>
+                    <p>Title!</p>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-9" id="randomNumberDiv">
+                <span>
+                    <p>value of random numbers!</p>
+                </span>
+            </div>
+            <div class="col-md-3" id="statsDiv">
+                <div class="row">
+                    <span>
+                        Result of last game!
+                    </span>
+                </div>
+                <div class="row">
+                    <span>
+                        Wins
+                    </span>
+                </div>
+                <div class="row">
+                    <span>
+                        Losses
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <span id="crystalDiv">
+                    Crystals 1
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <span id="crystalDiv">
+                    Crystals 2
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <span id="crystalDiv">
+                    Crystals 3
+                </span>
+            </div>
+            <div class="col-sm-3">
+                <span id="crystalDiv">
+                    Crystal 5
+                </span>
+            </div>
+        </div>
+        <div class="row" id="scoreDiv">
+            <div class="col-lg-12">
+                <a>your score is:</a>
+            </div>
+            <div class="col-lg-12">
+                <a>pointsValue</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var num1 = "";
+            var oper;
+            var num2 = "";
+            var result;
+            var equalsPressed = false;
+
+            $(".card-body").on("click", ".number", function () {
+                if (!oper && !num2) {
+                    num1 = num1 + $(this).val();
+                    $("#first-number").text(num1);
+                    $("#operator").text("");
+                } else if (num1 && oper && equalsPressed === false && equalsPressed === false && !result) {
+                    num2 = num2 + $(this).val();
+                    $("#second-number").text(num2);
+                }
+            });
+
+            $(".card-body").on("click", ".operator", function () {
+                if (!num1 && !num2) {
+                    alert("Pick a number first!");
+                } else if (num1 && !num2) {
+                    oper = $(this).val();
+                    $("#operator").text(oper);
+                }
+            });
+
+            $(".card-body").on("click", ".equal", function () {
+                if (oper === "plus" && num2) {
+                    result = (parseInt(num1) + parseInt(num2));
+                    $("#result").text(result);
+                } else if (oper === "minus" && num2) {
+                    result = num1 - num2;
+                    $("#result").text(result);
+                } else if (oper === "times" && num2) {
+                    result = num1 * num2;
+                    $("#result").text(result);
+                } else if (oper === "divide" && num2) {
+                    result = (parseInt(num1) / parseInt(num2));
+                    $("#result").text(result);
+                } else if (oper === "power" && num2) {
+                    result = Math.pow(parseInt(num1), parseInt(num2));
+                    $("#result").text(result);
+                }
+            });
+
+            $(".card-body").on("click", ".clear", function () {
+                num1 = "";
+                oper = undefined;
+                num2 = "";
+                result = undefined;
+                equalsPressed = false;
+                $("#first-number").text("");
+                $("#second-number").text("");
+                $("#operator").text("Cleared!");
+                $("#result").text("");
+            })
+        });
+
+    </script>
+
+</body>
+
+</html>
