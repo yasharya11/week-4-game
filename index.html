@@ -93,7 +93,7 @@ ROW5
     <!-- Jumbotron for Title -->
     <div class="container" style="padding-left:20%;padding-right:20%;">
         <div class="row" x>
-            <div class="col-lg-12" id="titleDiv">
+            <div class="col-lg-12" id="titleDiv" align="center">
                 <span>
                     <h1>Crystal Collector!</h1>
                 </span>
@@ -123,26 +123,26 @@ ROW5
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="crystalsRow">
             <div class="col-sm-3" align="center">
-                <span id="crystal1Div">
+                <button type="button" class="btn" id="crystalDiv">
                     <img src="assets/images/blue.png">
-                </span>
+                </button type="button" class="btn">
             </div>
             <div class="col-sm-3" align="center">
-                <span id="crystal2Div">
+                <button type="button" class="btn" id="crystalDiv">
                     <img src="assets/images/yellow.png">
-                </span>
+                </button type="button" class="btn">
             </div>
             <div class="col-sm-3" align="center">
-                <span id="crystal3Div">
+                <button type="button" class="btn" id="crystalDiv">
                     <img src="assets/images/red.png">
-                </span>
+                </button type="button" class="btn">
             </div>
             <div class="col-sm-3" align="center">
-                <span id="crystal4Div">
+                <button type="button" class="btn" id="crystalDiv">
                     <img src="assets/images/green.png">
-                </span>
+                </button type="button" class="btn">
             </div>
         </div>
         <div class="row" id="scoreDiv">
@@ -159,19 +159,25 @@ ROW5
         $(document).ready(function () {
             var pointsValue = 0;
             var randomNumber = Math.floor((Math.random()*50)+1);
+            console.log(randomNumber);
             var lastGameResult = undefined;
 
-            var Crystal
+            function Crystal(name)
+            {
+                this.name = name;
+                this.value = Math.floor(Math.random()*10)+1;
+                console.log(this.value);
 
-            $(".card-body").on("click", ".number", function () {
-                if (!oper && !num2) {
-                    num1 = num1 + $(this).val();
-                    $("#first-number").text(num1);
-                    $("#operator").text("");
-                } else if (num1 && oper && equalsPressed === false && equalsPressed === false && !result) {
-                    num2 = num2 + $(this).val();
-                    $("#second-number").text(num2);
+                getValue = function(){
+                    return value;
                 }
+
+            }
+
+            var crystal1 = new Crystal("Red");
+
+            $("#crystalsRow").on("click", "#crystalDiv", function () {
+                alert("asdf");
             });
 
             $(".card-body").on("click", ".operator", function () {
