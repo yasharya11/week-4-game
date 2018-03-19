@@ -76,7 +76,7 @@ ROW5
 
 <head>
     <meta charset="UTF-8">
-    <title>jQuery Calculator</title>
+    <title>Crystal Collector Game</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
     <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -95,62 +95,61 @@ ROW5
         <div class="row" x>
             <div class="col-lg-12" id="titleDiv">
                 <span>
-                    <p>Title!</p>
+                    <h1>Crystal Collector!</h1>
                 </span>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-9" id="randomNumberDiv">
-                <span>
-                    <p>value of random numbers!</p>
+                <span id="randomNumber">
+                    Value of Random Number
                 </span>
             </div>
             <div class="col-md-3" id="statsDiv">
                 <div class="row">
-                    <span>
+                    <span id="lastGameResultDiv">
                         Result of last game!
                     </span>
                 </div>
                 <div class="row">
-                    <span>
+                    <span id="numWinsDiv">
                         Wins
                     </span>
                 </div>
                 <div class="row">
-                    <span>
+                    <span id="numLossesDiv">
                         Losses
                     </span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">
-                <span id="crystalDiv">
-                    Crystals 1
+            <div class="col-sm-3" align="center">
+                <span id="crystal1Div">
+                    <img src="assets/images/blue.png">
                 </span>
             </div>
-            <div class="col-sm-3">
-                <span id="crystalDiv">
-                    Crystals 2
+            <div class="col-sm-3" align="center">
+                <span id="crystal2Div">
+                    <img src="assets/images/yellow.png">
                 </span>
             </div>
-            <div class="col-sm-3">
-                <span id="crystalDiv">
-                    Crystals 3
+            <div class="col-sm-3" align="center">
+                <span id="crystal3Div">
+                    <img src="assets/images/red.png">
                 </span>
             </div>
-            <div class="col-sm-3">
-                <span id="crystalDiv">
-                    Crystal 5
+            <div class="col-sm-3" align="center">
+                <span id="crystal4Div">
+                    <img src="assets/images/green.png">
                 </span>
             </div>
         </div>
         <div class="row" id="scoreDiv">
             <div class="col-lg-12">
-                <a>your score is:</a>
-            </div>
-            <div class="col-lg-12">
-                <a>pointsValue</a>
+                <h4>Your score is:</h4>
+            </div class="col-lg-12" >
+                <span id="pointsValueDiv">pointsValue</span>
             </div>
         </div>
     </div>
@@ -158,11 +157,11 @@ ROW5
     <script type="text/javascript">
 
         $(document).ready(function () {
-            var num1 = "";
-            var oper;
-            var num2 = "";
-            var result;
-            var equalsPressed = false;
+            var pointsValue = 0;
+            var randomNumber = Math.floor((Math.random()*50)+1);
+            var lastGameResult = undefined;
+
+            var Crystal
 
             $(".card-body").on("click", ".number", function () {
                 if (!oper && !num2) {
