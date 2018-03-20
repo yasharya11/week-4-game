@@ -107,8 +107,7 @@ ROW5
             </div>
             <div class="col-md-3" id="statsDiv">
                 <div class="row">
-                    <span id="lastGameResultDiv">
-                        Result of last game!
+                    <span id="gameResultDiv">
                     </span>
                 </div>
                 <div class="row">
@@ -125,7 +124,7 @@ ROW5
         </div>
         <div class="row" id="crystalsRow">
             <div class="col-sm-3" align="center">
-                <button type="button" class="btn" id="crystalDiv" value="0" >
+                <button type="button" class="btn" id="crystalDiv" value="0">
                     <img src="assets/images/blue.png">
                 </button>
             </div>
@@ -148,68 +147,67 @@ ROW5
         <div class="row" id="scoreDiv">
             <div class="col-lg-12">
                 <h4>Your score is:</h4>
-            </div class="col-lg-12" >
-                <span id="pointsValueDiv">pointsValue</span>
-            </div>
+            </div class="col-lg-12">
+            <span id="pointsValueDiv" style="padding-left: 15px">
+
+            </span>
         </div>
+    </div>
     </div>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
             var pointsValue = 0;
-            var randomNumber = Math.floor((Math.random()*50)+1);
-            var crystals = [Math.floor((Math.random()*7)+1),
-                            Math.floor((Math.random()*7)+1),
-                            Math.floor((Math.random()*7)+1),
-                            Math.floor((Math.random()*7)+1)];
-            var lastGameResult = undefined;
+            var randomNumber = Math.floor((Math.random() * 50) + 1);
+            var gameResult = "Try to win!";
+            var wins = 0;
+            var losses = 0;
+            var crystals = [Math.floor((Math.random() * 6) + 2),
+            Math.floor((Math.random() * 7) + 3),
+            Math.floor((Math.random() * 8) + 3),
+            Math.floor((Math.random() * 9) + 2)];
+
+            $("#pointsValueDiv").html("<h1>" + pointsValue + "</h1>");
+            $("#randomNumberDiv").html("<h1>" + randomNumber + "</h1>");
+            $("#gameResultDiv").html("<h4>" + gameResult + "</h4>");
+            $("#numWinsDiv").text("Wins: " + wins);
+            $("#numLossesDiv").text("Losses: " + losses);
 
             $("#crystalsRow").on("click", "#crystalDiv", function () {
                 var crystalIndex = $(this).val();
-            });
 
-            $(".card-body").on("click", ".operator", function () {
-                if (!num1 && !num2) {
-                    alert("Pick a number first!");
-                } else if (num1 && !num2) {
-                    oper = $(this).val();
-                    $("#operator").text(oper);
+                if (pointsValue < randomNumber) {
+                    pointsValue = pointsValue + crystals[crystalIndex];
+                    $("#pointsValueDiv").html("<h1>" + pointsValue + "</h1>");
+                    if (pointsValue === randomNumber) {
+                        wins++;
+                        $("#numWinsDiv").text("Wins: " + wins);
+                        gameResult = "Win!";
+                        resetGame();
+                        $("#gameResultDiv").html("<h4>Win!</h4>");
+                    } else if (pointsValue > randomNumber) {
+                        losses++;
+                        $("#numLossesDiv").text("Losses: " + losses);
+                        gameResult = "Loss!";
+                        resetGame();
+                        $("#gameResultDiv").html("<h4>Loss!</h4>");
+                    }
                 }
             });
 
-            $(".card-body").on("click", ".equal", function () {
-                if (oper === "plus" && num2) {
-                    result = (parseInt(num1) + parseInt(num2));
-                    $("#result").text(result);
-                } else if (oper === "minus" && num2) {
-                    result = num1 - num2;
-                    $("#result").text(result);
-                } else if (oper === "times" && num2) {
-                    result = num1 * num2;
-                    $("#result").text(result);
-                } else if (oper === "divide" && num2) {
-                    result = (parseInt(num1) / parseInt(num2));
-                    $("#result").text(result);
-                } else if (oper === "power" && num2) {
-                    result = Math.pow(parseInt(num1), parseInt(num2));
-                    $("#result").text(result);
-                }
-            });
+            function resetGame() {
+                pointsValue = 0;
+                randomNumber = Math.floor((Math.random() * 50) + 1);
+                crystals = [Math.floor((Math.random() * 6) + 2),
+                Math.floor((Math.random() * 7) + 3),
+                Math.floor((Math.random() * 8) + 3),
+                Math.floor((Math.random() * 9) + 2)];
 
-            $(".card-body").on("click", ".clear", function () {
-                num1 = "";
-                oper = undefined;
-                num2 = "";
-                result = undefined;
-                equalsPressed = false;
-                $("#first-number").text("");
-                $("#second-number").text("");
-                $("#operator").text("Cleared!");
-                $("#result").text("");
-            })
+                $("#pointsValueDiv").html("<h1>" + pointsValue + "</h1>");
+                $("#randomNumberDiv").html("<h1>" + randomNumber + "</h1>");
+            }
         });
-
     </script>
 
 </body>

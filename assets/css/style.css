@@ -14,7 +14,7 @@
     background-color: turquoise;
 }
 
-#crystalDiv{
+#crystalDiv, #crystalsRow{
     background-color: #fff;
 }
 
@@ -22,3 +22,6 @@
     background-color: goldenrod;
 }
 
+body {
+    background-color: beige;
+}
