@@ -125,24 +125,24 @@ ROW5
         </div>
         <div class="row" id="crystalsRow">
             <div class="col-sm-3" align="center">
-                <button type="button" class="btn" id="crystalDiv">
+                <button type="button" class="btn" id="crystalDiv" value="0" >
                     <img src="assets/images/blue.png">
-                </button type="button" class="btn">
+                </button>
             </div>
             <div class="col-sm-3" align="center">
-                <button type="button" class="btn" id="crystalDiv">
+                <button type="button" class="btn" id="crystalDiv" value="1">
                     <img src="assets/images/yellow.png">
-                </button type="button" class="btn">
+                </button>
             </div>
             <div class="col-sm-3" align="center">
-                <button type="button" class="btn" id="crystalDiv">
+                <button type="button" class="btn" id="crystalDiv" value="2">
                     <img src="assets/images/red.png">
-                </button type="button" class="btn">
+                </button>
             </div>
             <div class="col-sm-3" align="center">
-                <button type="button" class="btn" id="crystalDiv">
+                <button type="button" class="btn" id="crystalDiv" value="3">
                     <img src="assets/images/green.png">
-                </button type="button" class="btn">
+                </button>
             </div>
         </div>
         <div class="row" id="scoreDiv">
@@ -159,25 +159,14 @@ ROW5
         $(document).ready(function () {
             var pointsValue = 0;
             var randomNumber = Math.floor((Math.random()*50)+1);
-            console.log(randomNumber);
+            var crystals = [Math.floor((Math.random()*7)+1),
+                            Math.floor((Math.random()*7)+1),
+                            Math.floor((Math.random()*7)+1),
+                            Math.floor((Math.random()*7)+1)];
             var lastGameResult = undefined;
 
-            function Crystal(name)
-            {
-                this.name = name;
-                this.value = Math.floor(Math.random()*10)+1;
-                console.log(this.value);
-
-                getValue = function(){
-                    return value;
-                }
-
-            }
-
-            var crystal1 = new Crystal("Red");
-
             $("#crystalsRow").on("click", "#crystalDiv", function () {
-                alert("asdf");
+                var crystalIndex = $(this).val();
             });
 
             $(".card-body").on("click", ".operator", function () {
